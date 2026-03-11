@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    container_name: backend_container
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - redis
+
+  interface:
+    build:
+      context: ./interface
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    container_name: interface_container
+    volumes:
+      - ./interface:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:7
+    container_name: redis_container
+    ports:
+      - "6373:6373"
