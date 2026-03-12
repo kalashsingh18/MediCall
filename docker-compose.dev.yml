@@ -7,11 +7,14 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
+    env_file:
+      - ./backend/.env
     container_name: backend_container
     volumes:
       - ./backend:/app
     depends_on:
       - redis
+      - postgres
 
   interface:
     build:
@@ -19,6 +22,8 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
+    env_file:
+      - ./interface/.env
     container_name: interface_container
     volumes:
       - ./interface:/app
@@ -31,3 +36,16 @@ services:
     container_name: redis_container
     ports:
       - "6373:6373"
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: postgres_pgvector
+    env_file:
+      - .env
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -5,6 +5,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.prod
+    env_file:
+      - ./backend/.env
     ports:
       - "8000:8000"
     container_name: backend_container
@@ -15,6 +17,8 @@ services:
     build:
       context: ./interface
       dockerfile: Dockerfile.prod
+    env_file:
+      - ./interface/.env
     ports:
       - "5173:5173"
     container_name: interface_container
@@ -26,3 +30,16 @@ services:
     container_name: redis_container
     ports:
       - "6373:6373"
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: postgres_pgvector
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
