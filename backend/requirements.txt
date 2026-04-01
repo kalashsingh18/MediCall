@@ -1,7 +1,20 @@
-fastapi==0.135.1
+fastapi==0.115.0
 uvicorn[standard]==0.30.6
 redis==5.0.8
-sqlalchemy== 2.0.48
-asyncpg==0.31.0
-pydantic==2.12.5
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+pydantic==2.9.2
+pydantic-settings==2.5.2
 psycopg2-binary==2.9.10
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==3.2.0
+
+# Phase 5: AI Agent
+langchain
+langchain-groq
+langgraph
+twilio
+python-multipart==0.0.12
+alembic==1.14.0
+razorpay==1.4.1

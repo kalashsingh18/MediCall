@@ -33,19 +33,19 @@ services:
 
   redis:
     image: redis:7
-    container_name: redis_container
+    container_name: redis_container_new
     ports:
       - "6373:6373"
 
   postgres:
     image: pgvector/pgvector:pg16
-    container_name: postgres_pgvector
+    container_name: postgres_pgvector_new
     env_file:
       - .env
     ports:
       - "5433:5433"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    
+
 
 volumes:
   postgres_data:
